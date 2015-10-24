@@ -17,13 +17,8 @@ var Controler = {
      });
    },
    update: function(res, req){
-     var query = {name: /skol/i};
-     var mod = {
-         name: "Brahma",
-        alcohol: 4,
-        price: 6,
-        category: "pilsen"
-     };
+     var query = {_id: req.params.id};
+     var mod = req.body;
      var optional = {
          upset: false,
         mult: false
@@ -32,10 +27,10 @@ var Controler = {
      Model.update(query, mod, optional, function(err, data){
       if (err){
          console.log("erro", err);
-         msg = 'Erro:' + err;
+         msg = err;
       } else {
          console.log("update", data);
-         msg = '<h3>Dados atualizados!</h3><br/>Registros alterados: ' + data.n + ".";
+         msg = data;
       }
       res.json(msg);
      });
@@ -53,6 +48,19 @@ var Controler = {
          }
          res.json(msg);
 
+      });
+   },
+   get: function(res, req){
+     var query = {_id: req.params.id};
+      Model.findOne(query, function(err, data){
+         if (err){
+         console.log("erro", err);
+         msg = err;
+         } else {
+            console.log("Listagem: ", data);
+            msg = data;
+         }
+         res.json(msg);
       });
    },
    del: function(res, req){
