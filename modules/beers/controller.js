@@ -64,15 +64,15 @@ var Controler = {
       });
    },
    del: function(res, req){
-      var query = {name: /brahma/i};
-
+     var query = {_id: req.params.id};
+   
       Model.remove(query, function(err, data){
          if (err){
             console.log("erro", err);
-            msg = 'erro: ' + err;
+            msg = err;
          } else {
             console.log("Deletado com sucesso.", data);
-            msg = '<h2>Cerveja deletada com sucesso.</h2><br />' + data;
+            msg = data;
          }
         res.json(msg);
        });

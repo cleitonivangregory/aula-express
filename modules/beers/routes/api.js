@@ -4,8 +4,8 @@ var Controler = require('../controller.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	//Controler.retrieve(res, req);
-	Controler.get(res, req);
+	Controler.retrieve(res, req);
+	//Controler.get(res, req);
 });
 
 router.post('/', function(req, res, next) {
@@ -15,7 +15,5 @@ router.post('/', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
 	Controler.update(res, req);
 });
-
-
 
 module.exports = router;
