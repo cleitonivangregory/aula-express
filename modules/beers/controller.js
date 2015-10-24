@@ -2,23 +2,16 @@ var Model = require('./model');
 
 var Controler = {
    create: function(res, req){
-      var dados = {
-        name: "Skol",
-        description: "Mijo de rato",
-        alcohol: 4.5,
-        price: 3.0,
-        category: "pilsen"
-     };
+      var dados = req.body;
 
      var model = new Model(dados);
      model.save(function(err, data){
         if (err){
           console.log('Erro: ', err);
-            msg = 'Erro' + err;
+            msg = err;
         } else {
             console.log('gravou cerveja: ', data);
-            //var c = JSON.parse(data);
-            msg = '<h2>Cerveja criada com sucesso:</h2><br> ' + data;
+            msg = data;
        }
       res.json(msg);
      });
@@ -53,14 +46,10 @@ var Controler = {
       Model.find(query, function(err, data){
          if (err){
          console.log("erro", err);
-         msg = 'erro: ' + err;
+         msg = err;
          } else {
             console.log("Listagem: ", data);
-            msg = '<h2>Lista de Cervejas:</h2><br/>';
-            for(var i = 0; i < data.length; i++)
-            {
-              msg += "Name: " + data[i].name + " - Description: " + data[i].description + " - category: " + data[i].category + " - alcohol: " + data[i].alcohol + " - Price: " + data[i].price +"<br/>";
-            }
+            msg = data;
          }
          res.json(msg);
 
