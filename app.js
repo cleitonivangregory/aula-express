@@ -7,9 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var beers = require('./modules/beers/routes/');
 
 var API = [];
-API.beers = require('./modules/beers/routes/api.js');
+API.beers = require('./modules/beers/routes/api');
 
 var app = express();
 
@@ -29,7 +30,7 @@ app.use('/', routes);
 app.use('/users', users);
 
 app.use('/api/beers', API.beers);
-
+app.use('/beers', beers);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -2,7 +2,7 @@ var Model = require('./model');
 
 var Controler = {
    create: function(res, req){
-      var dados = req.body;
+      var dados = res.body;
 
      var model = new Model(dados);
      model.save(function(err, data){
@@ -18,7 +18,7 @@ var Controler = {
    },
    update: function(res, req){
      var query = {_id: req.params.id};
-     var mod = req.body;
+     var mod = res.body;
      var optional = {
          upset: false,
         mult: false
@@ -48,6 +48,21 @@ var Controler = {
          }
          res.json(msg);
 
+      });
+   },
+   list: function(res, req){
+      var query = {};
+
+      Model.find(query, function(err, data){
+         if (err){
+         console.log("erro", err);
+         msg = err;
+         } else {
+            console.log("Listagem: ", data);
+            msg = data;
+         }
+         console.log("Data> ", data);
+         res.render('list', { title: 'Listagem de Cervejas', beers: data });
       });
    },
    get: function(res, req){
