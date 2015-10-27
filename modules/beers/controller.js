@@ -2,7 +2,9 @@ var Model = require('./model');
 
 var Controler = {
    create: function(res, req){
-      var dados = res.body;
+    console.log('create');
+      var dados = req.body;
+      console.log("data: " + dados);
 
      var model = new Model(dados);
      model.save(function(err, data){
@@ -18,7 +20,7 @@ var Controler = {
    },
    update: function(res, req){
      var query = {_id: req.params.id};
-     var mod = res.body;
+     var mod = req.body;
      var optional = {
          upset: false,
         mult: false
@@ -36,6 +38,7 @@ var Controler = {
      });
    },
    retrieve: function(res, req){
+      console.log('retrieve');
       var query = {};
 
       Model.find(query, function(err, data){
@@ -61,12 +64,17 @@ var Controler = {
             console.log("Listagem: ", data);
             msg = data;
          }
-         console.log("Data> ", data);
+         console.log("Data: ", data);
          res.render('list', { title: 'Listagem de Cervejas', beers: data });
       });
    },
    get: function(res, req){
      var query = {_id: req.params.id};
+    console.log('req', req);
+    console.log('req.param', req.params);
+    console.log('req.param.id', req.params.id);
+    
+     console.log("query: ", query);
       Model.findOne(query, function(err, data){
          if (err){
          console.log("erro", err);

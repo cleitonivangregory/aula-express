@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node mongo ./bin/www"
+    "start": "node mongod ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

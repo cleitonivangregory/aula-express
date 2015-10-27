@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var Controler = require('../controller.js');
+var Controler = require('./../controller');
 
 router.get('/', function(req, res, next) {
-	//Controler.retrieve(res, req);
+	Controler.retrieve(res, req);
+});
+
+router.get('/:id', function(req, res, next) {
 	Controler.get(res, req);
 });
 
